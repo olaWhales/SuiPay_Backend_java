@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 @Setter
 public class SignUpResponse {
     private String message ;
+    private String token ;
 
     public String getMessage() {
         return message;
@@ -16,4 +17,6 @@ public class SignUpResponse {
     public void setMessage(String message) {
         this.message = message;
     }
+
+
 }

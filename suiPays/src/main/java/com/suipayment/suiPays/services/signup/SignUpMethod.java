@@ -102,6 +102,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -182,8 +183,9 @@ public SignUpResponse verifyPasskey(SignUpRequestPasskey request) {
     @Override
     public SignUpResponse saveUsername(SignUpRequestUsername request) {
         SignUpResponse response = new SignUpResponse();
-        Users user = signUpRepository.findByEmail(request.getEmail());
-
+        Users user = signUpRepository.findByEmail(request.getEmail()).
+                orElseThrow(()-> new IllegalArgumentException("")
+        );
         if (user != null) {
             user.setUserName(request.getUserName());
             signUpRepository.save(user);
